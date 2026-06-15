@@ -23,8 +23,9 @@ syntax keyword waveletBoolean true false
 syntax keyword waveletConstant some none ok err
 
 " Call heads: a (possibly %-escaped, possibly qualified) name attached, with no
-" space, to ( [ or {.
-syntax match waveletCallHead "%\?[A-Za-z][A-Za-z0-9_-]*\%(/%\?[A-Za-z0-9_-]\+\)\?\%([([{]\)\@="
+" space, to ( . Only ( attaches now — a name before [ or { is an ordinary
+" name/reference, not a call head.
+syntax match waveletCallHead "%\?[A-Za-z][A-Za-z0-9_-]*\%(/%\?[A-Za-z0-9_-]\+\)\?\%((\)\@="
 
 " The alias side of a free-standing qualified reference (kv/get as a value).
 syntax match waveletNamespace "%\?[A-Za-z][A-Za-z0-9_-]*\%(/\)\@="
