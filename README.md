@@ -19,8 +19,10 @@ repo) and the shared Prism grammar used by the docs. It highlights:
 - `int` / `float` / `inf` / `nan` numbers
 - `true` / `false` booleans and `some` / `none` / `ok` / `err` constructors
 - TitleCase macro heads (`If`, `Def`, `Fn`, `Package`, ...)
-- call heads (a name attached, with no space, to `(`)
+- call heads (a name attached, with no space, to `(`) — including the name in a
+  chained call `recv.name(...)`
 - `alias/name` qualified references and `name:` record keys
+- the chain `.` joining a receiver to a call (`recv.name(...)`)
 
 ## Install (LazyVim / lazy.nvim)
 

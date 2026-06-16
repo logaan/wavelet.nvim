@@ -12,8 +12,10 @@ endif
 
 syntax case match
 
-" Punctuation: ( ) [ ] { } , : /
-syntax match waveletPunctuation "[(){}\[\],:/]"
+" Punctuation: ( ) [ ] { } , : / .  ('.' is the call-chaining operator,
+" recv.name(...); the number rule below already claims any decimal point, so a
+" bare '.' is always a chain dot.)
+syntax match waveletPunctuation "[(){}\[\],:/.]"
 
 " int / float / inf / nan numbers (optionally negative)
 syntax match waveletNumber "-\?\<\%(inf\|nan\|\d\+\%(\.\d\+\)\?\%([eE][+-]\?\d\+\)\?\)\>"
