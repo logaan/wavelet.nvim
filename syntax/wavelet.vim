@@ -43,12 +43,10 @@ syntax match waveletChar "'\%(\\\%(u{[0-9a-fA-F]\+}\|.\)\|[^\\']\)'"
 syntax match waveletEscape contained "\\\%(u{[0-9a-fA-F]\+}\|[nrt\\\"']\)"
 syntax region waveletString start=+"+ skip=+\\"+ end=+"+ contains=waveletEscape
 
-" // line comments and /// doc comments (//// is an ordinary comment)
+" // line comments
 syntax match waveletComment "//.*$"
-syntax match waveletDocComment "///\%(/\)\@!.*$"
 
 highlight default link waveletComment     Comment
-highlight default link waveletDocComment  SpecialComment
 highlight default link waveletString      String
 highlight default link waveletEscape      SpecialChar
 highlight default link waveletChar        Character
