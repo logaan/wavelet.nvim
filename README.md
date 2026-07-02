@@ -1,7 +1,7 @@
 # wavelet.nvim
 
 Neovim support for the [Wavelet](https://github.com/logaan/wavelet) language:
-syntax highlighting and `.wvl` filetype detection, plus automatic
+syntax highlighting and `.wlt` filetype detection, plus automatic
 language-server support (diagnostics, completion, hover, document symbols) via
 the [`wavelet-lsp`](https://github.com/logaan/wavelet/tree/main/tooling/wavelet-lsp)
 binary.
@@ -32,20 +32,20 @@ return {
     "logaan/wavelet.nvim",
     ft = "wavelet",
     init = function()
-      vim.filetype.add({ extension = { wvl = "wavelet" } })
+      vim.filetype.add({ extension = { wlt = "wavelet" } })
     end,
   },
 }
 ```
 
-The `init` registers the `.wvl` → `wavelet` mapping at startup so the plugin
+The `init` registers the `.wlt` → `wavelet` mapping at startup so the plugin
 lazy-loads on the first Wavelet buffer. (`ftdetect/wavelet.vim` also ships in the
 package for non-lazy / classic-Vim setups.)
 
 ## Language server
 
 For diagnostics, completion, hover, and document symbols, put the `wavelet-lsp`
-binary on your `PATH` — the plugin starts it automatically for every `.wvl`
+binary on your `PATH` — the plugin starts it automatically for every `.wlt`
 buffer. Install it from the Wavelet repo:
 
 ```console

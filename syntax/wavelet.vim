@@ -1,4 +1,4 @@
-" Vim syntax file for Wavelet (.wvl)
+" Vim syntax file for Wavelet (.wlt)
 "
 " Token classes mirror the Wavelet lexer (src/lexer.rs) and the shared Prism
 " grammar used by the docs (docs/src/prism/wavelet.js). Keep the three in sync.

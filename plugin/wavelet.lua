@@ -1,4 +1,4 @@
--- Start the Wavelet language server (wavelet-lsp) for `.wvl` buffers in Neovim.
+-- Start the Wavelet language server (wavelet-lsp) for `.wlt` buffers in Neovim.
 --
 -- Neovim only: classic Vim has no built-in LSP client, so this is a no-op there
 -- and you still get syntax highlighting from syntax/wavelet.vim.

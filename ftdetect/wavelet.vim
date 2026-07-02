@@ -1,2 +1,2 @@
 " Detect Wavelet source files.
-autocmd BufRead,BufNewFile *.wvl setfiletype wavelet
+autocmd BufRead,BufNewFile *.wlt setfiletype wavelet
