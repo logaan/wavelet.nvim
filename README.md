@@ -18,6 +18,7 @@ repo) and the shared Prism grammar used by the docs. It highlights:
 - `"..."` strings and `'.'` chars, with `\n` / `\u{...}` escapes
 - `int` / `float` / `inf` / `nan` numbers
 - `true` / `false` booleans and `some` / `none` / `ok` / `err` constructors
+- the standalone `_` type placeholder (an absent result arm, `result(_ e)`)
 - TitleCase macro heads (`If`, `Def`, `Fn`, `Package`, ...)
 - call heads (a name attached, with no space, to `(`)
 - `alias/name` qualified references and `name:` record keys

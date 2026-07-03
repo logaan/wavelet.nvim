@@ -22,6 +22,9 @@ syntax match waveletNumber "-\?\<\%(inf\|nan\|\d\+\%(\.\d\+\)\?\%([eE][+-]\?\d\+
 syntax keyword waveletBoolean true false
 syntax keyword waveletConstant some none ok err
 
+" The standalone `_` type placeholder (an absent result arm: result(_ e))
+syntax match waveletPlaceholder "\%([A-Za-z0-9_-]\)\@<!_\%([A-Za-z0-9_-]\)\@!"
+
 " Call heads: a (possibly %-escaped, possibly qualified) name attached, with no
 " space, to ( . Only ( attaches now — a name before [ or { is an ordinary
 " name/reference, not a call head.
@@ -53,6 +56,7 @@ highlight default link waveletChar        Character
 highlight default link waveletNumber      Number
 highlight default link waveletBoolean     Boolean
 highlight default link waveletConstant    Constant
+highlight default link waveletPlaceholder Constant
 highlight default link waveletMacro       Keyword
 highlight default link waveletCallHead    Function
 highlight default link waveletNamespace   Type
