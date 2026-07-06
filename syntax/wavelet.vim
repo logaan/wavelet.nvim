@@ -49,6 +49,11 @@ syntax region waveletString start=+"+ skip=+\\"+ end=+"+ contains=waveletEscape
 " // line comments
 syntax match waveletComment "//.*$"
 
+" Leading #!/usr/bin/env wavelet shebang (only meaningful on line 1, where the
+" lexer skips it so a .wlt file can run as a script). Highlight like a comment.
+syntax match waveletShebang "\%^#!.*$"
+
+highlight default link waveletShebang     Comment
 highlight default link waveletComment     Comment
 highlight default link waveletString      String
 highlight default link waveletEscape      SpecialChar

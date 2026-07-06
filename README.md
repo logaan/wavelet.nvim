@@ -14,7 +14,7 @@ install.
 The syntax grammar mirrors the language's lexer (`src/lexer.rs` in the Wavelet
 repo) and the shared Prism grammar used by the docs. It highlights:
 
-- `//` line comments
+- `#!` leading shebang line and `//` line comments
 - `"..."` strings and `'.'` chars, with `\n` / `\u{...}` escapes
 - `int` / `float` / `inf` / `nan` numbers
 - `true` / `false` booleans and `some` / `none` / `ok` / `err` constructors
