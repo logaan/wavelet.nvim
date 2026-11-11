@@ -71,3 +71,5 @@ The syntax groups link to the standard Vim highlight groups (`Comment`,
 `String`, `Function`, `Keyword`, ...), so your colorscheme drives the colours.
 To override a specific token, add e.g. `highlight link waveletMacro Special` to
 your config after the colorscheme loads.
+
+Names may use `/` as sugar for `-`, including multiple segments. A TitleCase word anywhere in a name marks a macro call; `lib/Identity` and `lib-Identity` have the same meaning.

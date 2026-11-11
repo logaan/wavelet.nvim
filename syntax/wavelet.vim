@@ -1,56 +1,32 @@
-" Vim syntax file for Wavelet (.wlt)
-"
-" Token classes mirror the Wavelet lexer (src/lexer.rs) and the shared Prism
-" grammar used by the docs (docs/src/prism/wavelet.js). Keep the three in sync.
-"
-" Definition order matters: for matches that start at the same column Vim gives
-" priority to the item defined last, so the more specific tokens come later.
-
 if exists("b:current_syntax")
   finish
 endif
 
 syntax case match
 
-" Punctuation: ( ) [ ] { } , : /
 syntax match waveletPunctuation "[(){}\[\],:/]"
 
-" int / float / inf / nan numbers (optionally negative)
 syntax match waveletNumber "-\?\<\%(inf\|nan\|\d\+\%(\.\d\+\)\?\%([eE][+-]\?\d\+\)\?\)\>"
 
-" Booleans and WAVE option/result constructors (keywords have top priority)
 syntax keyword waveletBoolean true false
 syntax keyword waveletConstant some none ok err
 
-" The standalone `_` type placeholder (an absent result arm: result(_ e))
 syntax match waveletPlaceholder "\%([A-Za-z0-9_-]\)\@<!_\%([A-Za-z0-9_-]\)\@!"
 
-" Call heads: a (possibly %-escaped, possibly qualified) name attached, with no
-" space, to ( . Only ( attaches now — a name before [ or { is an ordinary
-" name/reference, not a call head.
-syntax match waveletCallHead "%\?[A-Za-z][A-Za-z0-9_-]*\%(/%\?[A-Za-z0-9_-]\+\)\?\%((\)\@="
+syntax match waveletCallHead "%\?[A-Za-z][A-Za-z0-9_-]*\%(/%\?[A-Za-z0-9_-]\+\)*\%((\)\@="
 
-" The alias side of a free-standing qualified reference (kv/get as a value).
-syntax match waveletNamespace "%\?[A-Za-z][A-Za-z0-9_-]*\%(/\)\@="
 
-" Record keys: name:
 syntax match waveletProperty "%\?[A-Za-z][A-Za-z0-9_-]*\%(\s*:\)\@="
 
-" TitleCase macro heads: leading capital, at least one lowercase, no hyphen.
-syntax match waveletMacro "\<[A-Z][A-Za-z0-9]*[a-z][A-Za-z0-9]*\>"
+syntax match waveletMacro "\<\%([A-Za-z][A-Za-z0-9]*[-/]\)*[A-Z][A-Za-z0-9]*[a-z][A-Za-z0-9]*\%([-/][A-Za-z][A-Za-z0-9]*\)*\>"
 
-" '.' char literals, with \n / \u{...} escapes
 syntax match waveletChar "'\%(\\\%(u{[0-9a-fA-F]\+}\|.\)\|[^\\']\)'"
 
-" "..." strings, with \n / \u{...} escapes
 syntax match waveletEscape contained "\\\%(u{[0-9a-fA-F]\+}\|[nrt\\\"']\)"
 syntax region waveletString start=+"+ skip=+\\"+ end=+"+ contains=waveletEscape
 
-" // line comments
 syntax match waveletComment "//.*$"
 
-" Leading #!/usr/bin/env wavelet shebang (only meaningful on line 1, where the
-" lexer skips it so a .wlt file can run as a script). Highlight like a comment.
 syntax match waveletShebang "\%^#!.*$"
 
 highlight default link waveletShebang     Comment
@@ -64,7 +40,6 @@ highlight default link waveletConstant    Constant
 highlight default link waveletPlaceholder Constant
 highlight default link waveletMacro       Keyword
 highlight default link waveletCallHead    Function
-highlight default link waveletNamespace   Type
 highlight default link waveletProperty    Label
 highlight default link waveletPunctuation Delimiter
 
