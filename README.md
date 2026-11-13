@@ -19,9 +19,10 @@ repo) and the shared Prism grammar used by the docs. It highlights:
 - `int` / `float` / `inf` / `nan` numbers
 - `true` / `false` booleans and `some` / `none` / `ok` / `err` constructors
 - the standalone `_` type placeholder (an absent result arm, `result(_ e)`)
-- TitleCase macro heads (`If`, `Def`, `Fn`, `Package`, ...)
-- call heads (a name attached, with no space, to `(`)
-- `alias/name` qualified references and `name:` record keys
+- macro heads containing a TitleCase word (`If`, `lib/Identity`, `lib-Identity`, ...)
+- call heads (a name attached, with no space, to `(`), including multi-segment names
+- slash-separated names (slash normalizes to hyphen) and `name:` record keys
+- the `.` joining a receiver to a chained call
 
 ## Install (LazyVim / lazy.nvim)
 
@@ -53,7 +54,11 @@ buffer. Install it from the Wavelet repo:
 $ cargo install --path tooling/wavelet-lsp     # installs into ~/.cargo/bin
 ```
 
-or download a prebuilt `wavelet-lsp-<platform>` binary from the
+Re-run the install command after updating the Wavelet checkout to pick up
+compiler diagnostics and builtin completion/hover changes. Updating this plugin
+does not update the language-server binary.
+
+Alternatively, download a prebuilt `wavelet-lsp-<platform>` binary from the
 [Wavelet releases page](https://github.com/logaan/wavelet/releases/latest).
 
 To point at a specific binary instead of searching `PATH`, set:
@@ -73,3 +78,14 @@ To override a specific token, add e.g. `highlight link waveletMacro Special` to
 your config after the colorscheme loads.
 
 Names may use `/` as sugar for `-`, including multiple segments. A TitleCase word anywhere in a name marks a macro call; `lib/Identity` and `lib-Identity` have the same meaning.
+
+## Development checks
+
+From this repository, run the highlighting regression checks with Neovim:
+
+```console
+nvim --headless -u NONE -l tests/highlighting.lua
+```
+
+These cover chaining punctuation, decimal literals, slash-separated calls,
+prefixed macros, placeholders, and the current file extension.

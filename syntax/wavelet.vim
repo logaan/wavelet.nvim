@@ -4,7 +4,7 @@ endif
 
 syntax case match
 
-syntax match waveletPunctuation "[(){}\[\],:/]"
+syntax match waveletPunctuation "[(){}\[\],:/.]"
 
 syntax match waveletNumber "-\?\<\%(inf\|nan\|\d\+\%(\.\d\+\)\?\%([eE][+-]\?\d\+\)\?\)\>"
 
