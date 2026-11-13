@@ -1,7 +1,7 @@
 # wavelet.nvim
 
 Neovim support for the [Wavelet](https://github.com/logaan/wavelet) language:
-syntax highlighting and `.wlt` filetype detection, plus automatic
+syntax highlighting, `.wlt` filetype detection, and automatic map formatting, plus automatic
 language-server support (diagnostics, completion, hover, document symbols) via
 the [`wavelet-lsp`](https://github.com/logaan/wavelet/tree/main/tooling/wavelet-lsp)
 binary.
@@ -32,6 +32,7 @@ Drop a spec in `~/.config/nvim/lua/plugins/wavelet.lua`:
 return {
   {
     "logaan/wavelet.nvim",
+    version = "v0.1.0",
     ft = "wavelet",
     init = function()
       vim.filetype.add({ extension = { wlt = "wavelet" } })
@@ -43,6 +44,23 @@ return {
 The `init` registers the `.wlt` → `wavelet` mapping at startup so the plugin
 lazy-loads on the first Wavelet buffer. (`ftdetect/wavelet.vim` also ships in the
 package for non-lazy / classic-Vim setups.)
+
+## Formatting
+
+Neovim automatically formats maps on save. Maps that extend past column 80,
+plus maps that already span multiple lines, use one field per line with values
+aligned vertically. Nested maps are handled independently; short single-line
+maps are left alone. Strings, characters, and comments are preserved. This is a
+map formatter, not a general-purpose Wavelet pretty-printer.
+
+Run `:WaveletFormat` to format the current buffer without saving. Formatting
+works without the language server. To change the width or disable formatting
+on save, set these globals in your configuration:
+
+```lua
+vim.g.wavelet_format_width = 80
+vim.g.wavelet_format_on_save = false
+```
 
 ## Language server
 
@@ -85,7 +103,10 @@ From this repository, run the highlighting regression checks with Neovim:
 
 ```console
 nvim --headless -u NONE -l tests/highlighting.lua
+nvim --headless -u NONE -l tests/formatting.lua
 ```
 
 These cover chaining punctuation, decimal literals, slash-separated calls,
-prefixed macros, placeholders, and the current file extension.
+prefixed macros, placeholders, and the current file extension. Formatting checks
+cover nested maps, alignment, idempotence, literals, comments, the format command,
+and formatting on save.

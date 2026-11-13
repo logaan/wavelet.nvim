@@ -2,6 +2,18 @@ if vim.fn.has("nvim-0.8") == 0 then
   return
 end
 
+vim.api.nvim_create_user_command("WaveletFormat", function()
+  require("wavelet.format").buffer()
+end, {})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function(args)
+    if vim.bo[args.buf].filetype == "wavelet" and vim.g.wavelet_format_on_save ~= false then
+      require("wavelet.format").buffer(args.buf)
+    end
+  end,
+})
+
 local function server_cmd()
   if vim.g.wavelet_lsp_path and vim.g.wavelet_lsp_path ~= "" then
     return vim.g.wavelet_lsp_path
